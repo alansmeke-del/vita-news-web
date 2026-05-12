@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vita News — El newsletter de negocios para México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1814;
+    --ink-2: #2E2C28;
+    --ink-3: #4A4740;
+    --paper: #F7F3EC;
+    --paper-2: #EDE8DF;
+    --paper-3: #E2DCD0;
+    --gold: #B8860B;
+    --gold-light: #D4A017;
+    --red-accent: #8B1A1A;
+    --rule: rgba(26,24,20,0.12);
+    --rule-strong: rgba(26,24,20,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* TOP RULE */
+  .top-rule {
+    height: 4px;
+    background: var(--ink);
+  }
+
+  .top-rule-thin {
+    height: 1px;
+    background: var(--ink);
+    margin-top: 3px;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    text-align: center;
+    padding: 2rem 2rem 1.2rem;
+    border-bottom: 1px solid var(--rule-strong);
+    position: relative;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .masthead-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    color: var(--ink);
+  }
+
+  .masthead-tagline {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 0.6rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  .nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 3px double var(--rule-strong);
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .nav-item {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    color: var(--ink);
+    text-decoration: none;
+    border-right: 1px solid var(--rule);
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+
+  .nav-item:first-child { border-left: 1px solid var(--rule); }
+  .nav-item:hover { background: var(--paper-2); }
+  .nav-item.active { background: var(--ink); color: var(--paper); }
+
+  /* HERO */
+  .hero {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .hero-left {}
+
+  .hero-kicker {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-accent);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-kicker::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--red-accent);
+  }
+
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .hero-deck {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-byline {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 13px 24px;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+  }
+
+  .btn-primary:hover { background: var(--ink-2); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid var(--rule-strong);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .btn-secondary:hover { background: var(--paper-2); }
+
+  .btn-note {
+    font-size: 10px;
+    color: var(--ink-3);
+    text-align: center;
+    font-weight: 300;
+  }
+
+  /* HERO RIGHT */
+  .hero-right {
+    border-left: 1px solid var(--rule);
+    padding-left: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sidebar-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-feature {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sidebar-feature:last-child { border-bottom: none; }
+
+  .sidebar-tag {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red-accent);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-headline {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .sidebar-summary {
+    font-size: 11px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .sidebar-blurred {
+    filter: blur(3px);
+    opacity: 0.35;
+    user-select: none;
+  }
+
+  /* PLANS SECTION */
+  .plans-section {
+    background: var(--ink);
+    padding: 4rem 2rem;
+  }
+
+  .plans-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .plans-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(247,243,236,0.1);
+  }
+
+  .plans-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .plans-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--paper);
+    line-height: 1.2;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(247,243,236,0.1);
+  }
+
+  .plan-card {
+    background: var(--ink);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .plan-card-premium {
+    background: var(--ink-2);
+  }
+
+  .plan-card-premium::before {
+    content: 'RECOMENDADO';
+    position: absolute;
+    top: -1px;
+    left: 2rem;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 3px 10px;
+    font-weight: 500;
+  }
+
+  .plan-type {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247,243,236,0.35);
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 0.3rem;
+  }
+
+  .plan-price {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.8rem;
+    color: var(--paper);
+    line-height: 1;
+  }
+
+  .plan-card-premium .plan-price { color: var(--gold-light); }
+
+  .plan-period {
+    font-size: 11px;
+    color: rgba(247,243,236,0.3);
+    font-weight: 300;
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: rgba(247,243,236,0.1);
+    margin: 1.2rem 0;
+  }
+
+  .plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .plan-feat {
+    font-size: 12px;
+    color: rgba(247,243,236,0.55);
+    font-weight: 300;
+    display: flex;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .plan-feat-check { color: var(--gold-light); flex-shrink: 0; }
+  .plan-feat-x { color: rgba(247,243,236,0.15); flex-shrink: 0; }
+
+  .plan-feat.dim { color: rgba(247,243,236,0.2); text-decoration: line-through; }
+
+  .plan-btn-free {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    text-align: center;
+    background: transparent;
+    border: 1px solid rgba(247,243,236,0.2);
+    color: rgba(247,243,236,0.6);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .plan-btn-free:hover {
+    border-color: rgba(247,243,236,0.4);
+    color: var(--paper);
+  }
+
+  .plan-btn-premium {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    text-align: center;
+    background: var(--gold);
+    border: none;
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .plan-btn-premium:hover { background: var(--gold-light); }
+
+  /* PREVIEW SECTION */
+  .preview-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-bottom: 3px double var(--rule-strong);
+  }
+
+  .preview-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .preview-card {
+    border: 1px solid var(--rule);
+    background: white;
+  }
+
+  .preview-card-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--paper-2);
+  }
+
+  .preview-card-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .preview-card-badge {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+  }
+
+  .badge-free {
+    background: var(--paper-3);
+    color: var(--ink-3);
+  }
+
+  .badge-premium {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .preview-card-body {
+    padding: 14px;
+  }
+
+  .preview-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .preview-row-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    min-width: 70px;
+    padding-top: 1px;
+    font-weight: 500;
+  }
+
+  .preview-row-text {
+    flex: 1;
+    color: var(--ink-2);
+    font-weight: 300;
+  }
+
+  .blurred {
+    filter: blur(3.5px);
+    opacity: 0.3;
+    user-select: none;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .footer-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-note {
+    font-size: 10px;
+    color: rgba(247,243,236,0.2);
+    letter-spacing: 0.05em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,24,20,0.85);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--paper);
+    border-top: 4px solid var(--ink);
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    position: relative;
+    transform: translateY(16px);
+    transition: transform 0.25s;
+  }
+
+  .modal-overlay.active .modal { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--ink-3);
+    cursor: pointer;
+  }
+
+  .modal-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal p {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .modal-input {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+    margin-bottom: 1rem;
+  }
+
+  .modal-input:focus { border-color: var(--ink); }
+  .modal-note { font-size: 10px; color: var(--ink-3); text-align: center; margin-top: 0.6rem; font-weight: 300; }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .preview-grid { grid-template-columns: 1fr; }
+    .nav-bar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+<div class="top-rule-thin"></div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>Ciudad de México</span>
+    <span id="masthead-date">Cargando fecha...</span>
+    <span>Edición diaria · 7:00 AM</span>
+  </div>
+  <div class="masthead-name">Vita News</div>
+  <div class="masthead-tagline">El newsletter de negocios para México</div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-item active" href="#">Inicio</a>
+  <a class="nav-item" href="#preview">Vista previa</a>
+  <a class="nav-item" href="#planes">Planes</a>
+  <a class="nav-item" href="#" onclick="openFreeModal(); return false;">Gratis</a>
+  <a class="nav-item active" href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00">Premium →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Por qué leer Vita News</div>
+    <h1>La información que mueve a los negocios mexicanos — cada mañana a las 7 AM.</h1>
+    <p class="hero-deck">Análisis verificado, contexto real, recomendaciones concretas. Sin ruido. Sin opinión disfrazada de noticia. Solo lo que importa para tu empresa hoy.</p>
+    <div class="hero-byline">Fuentes Tier 1 · Reuters · Bloomberg · El Financiero · Fuentes oficiales</div>
+    <div class="hero-cta-group">
+      <a href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00" class="btn-primary">Suscribirme Premium — $150 MXN/mes</a>
+      <button class="btn-secondary" onclick="openFreeModal()">Empezar gratis</button>
+      <div class="btn-note">Sin tarjeta de crédito · Cancela cuando quieras</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="sidebar-label">En la edición de hoy</div>
+
+    <div class="sidebar-feature">
+      <div class="sidebar-tag">Mercados</div>
+      <div class="sidebar-headline">Petróleo supera los $100 por tensiones en Medio Oriente</div>
+      <div class="sidebar-summary">WTI en $101.34 (+3.33%). Impacto directo en gasolineras y Pemex esta semana.</div>
+    </div>
+
+    <div class="sidebar-feature">
+      <div class="sidebar-tag">Comercio</div>
+      <div class="sidebar-headline">México y UE cierran acuerdo bilateral — cumbre el 22 de mayo</div>
+      <div class="sidebar-summary">86 mil mdd en comercio bilateral. Oportunidad para exportadores.</div>
+    </div>
+
+    <div class="sidebar-feature">
+      <div class="sidebar-tag">Lección del día — Premium</div>
+      <div class="sidebar-headline">El principio de Pareto aplicado a tus finanzas</div>
+      <div class="sidebar-summary sidebar-blurred">El 80% de tus ganancias viene del 20% de tus clientes. Identificar ese 20% y protegerlo es más rentable que buscar nuevos clientes. Aquí cómo aplicarlo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW -->
+<section class="preview-section" id="preview">
+  <div class="preview-label">Vista previa — Gratis vs Premium</div>
+  <div class="preview-grid">
+    <div class="preview-card">
+      <div class="preview-card-header">
+        <div class="preview-card-title">Plan Gratuito</div>
+        <div class="preview-card-badge badge-free">Gratis</div>
+      </div>
+      <div class="preview-card-body">
+        <div class="preview-row">
+          <div class="preview-row-label">Qué pasó</div>
+          <div class="preview-row-text">WTI cerró en $101.34 (+3.33%) tras escalada diplomática en Medio Oriente.</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-label">Impacto MX</div>
+          <div class="preview-row-text">Gasolineras podrían subir precios en 2–3 semanas.</div>
+        </div>
+        <div class="preview-row blurred">
+          <div class="preview-row-label">Por qué</div>
+          <div class="preview-row-text">El ciclo de recortes de la Fed terminó antes de lo esperado, presionando los activos de riesgo globales incluyendo el crudo.</div>
+        </div>
+        <div class="preview-row blurred">
+          <div class="preview-row-label">Qué hacer</div>
+          <div class="preview-row-text">Fondos de renta variable del sector energético en GBM+ o bonos de Pemex para capturar el rally.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-card-header">
+        <div class="preview-card-title">Plan Premium</div>
+        <div class="preview-card-badge badge-premium">Premium</div>
+      </div>
+      <div class="preview-card-body">
+        <div class="preview-row">
+          <div class="preview-row-label">Qué pasó</div>
+          <div class="preview-row-text">WTI cerró en $101.34 (+3.33%) tras escalada diplomática en Medio Oriente.</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-label">Impacto MX</div>
+          <div class="preview-row-text">Gasolineras podrían subir precios en 2–3 semanas.</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-label">Por qué</div>
+          <div class="preview-row-text">El ciclo de recortes de la Fed terminó antes de lo esperado, presionando los activos de riesgo globales incluyendo el crudo.</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-label">Qué hacer</div>
+          <div class="preview-row-text">Fondos de renta variable del sector energético en GBM+ o bonos de Pemex para capturar el rally.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-section" id="planes">
+  <div class="plans-inner">
+    <div class="plans-header">
+      <div class="plans-eyebrow">Elige tu plan</div>
+      <div class="plans-title">Empieza gratis.<br>Lee todo con Premium.</div>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-type">Plan Gratuito</div>
+        <div class="plan-price-row">
+          <div class="plan-price">$0</div>
+          <div class="plan-period">para siempre</div>
+        </div>
+        <div class="plan-divider"></div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Todas las noticias del día</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> 1 análisis "Por qué afecta a México" por noticia</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> 1 recomendación práctica por noticia</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Título de la lección del día</div>
+          <div class="plan-feat dim"><span class="plan-feat-x">✗</span> Análisis completos</div>
+          <div class="plan-feat dim"><span class="plan-feat-x">✗</span> Todas las recomendaciones</div>
+          <div class="plan-feat dim"><span class="plan-feat-x">✗</span> Lección completa</div>
+          <div class="plan-feat dim"><span class="plan-feat-x">✗</span> Ediciones de autor</div>
+        </div>
+        <button class="plan-btn-free" onclick="openFreeModal()">Suscribirme gratis</button>
+      </div>
+
+      <div class="plan-card plan-card-premium">
+        <div class="plan-type">Plan Premium</div>
+        <div class="plan-price-row">
+          <div class="plan-price">$150</div>
+          <div class="plan-period">MXN / mes</div>
+        </div>
+        <div class="plan-divider"></div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Todo lo del plan gratuito</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Todos los análisis completos</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Todas las recomendaciones prácticas</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Lección del día completa</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Ediciones de autor — ideas globales aplicadas a México</div>
+          <div class="plan-feat"><span class="plan-feat-check">✓</span> Fuentes verificadas Tier 1</div>
+        </div>
+        <a href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00" class="plan-btn-premium">Quiero acceso Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-name">Vita News</div>
+  <div class="footer-note">© 2026 · vitanews.com.mx · Ciudad de México · Cancela cuando quieras</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="freeModal" onclick="closeFreeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeFreeModalBtn()">✕</button>
+    <div class="modal-eyebrow">Plan Gratuito</div>
+    <h3>Empieza a leer hoy</h3>
+    <p>Recibe el newsletter cada mañana a las 7 AM. Sin tarjeta. Sin compromiso.</p>
+    <input type="email" class="modal-input" placeholder="tu@empresa.com" id="freeEmail">
+    <button class="btn-primary" onclick="submitFree()">Suscribirme gratis</button>
+    <div class="modal-note">Puedes cancelar en cualquier momento.</div>
+  </div>
+</div>
+
+<script>
+  // Fecha dinámica en español
+  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const hoy = new Date();
+  const fechaStr = `${dias[hoy.getDay()]}, ${hoy.getDate()} de ${meses[hoy.getMonth()]} de ${hoy.getFullYear()}`;
+  document.getElementById('masthead-date').textContent = fechaStr;
+
+  function openFreeModal() {
+    document.getElementById('freeModal').classList.add('active');
+  }
+  function closeFreeModalBtn() {
+    document.getElementById('freeModal').classList.remove('active');
+  }
+  function closeFreeModal(e) {
+    if (e.target === document.getElementById('freeModal')) {
+      document.getElementById('freeModal').classList.remove('active');
+    }
+  }
+  function submitFree() {
+    const email = document.getElementById('freeEmail').value;
+    if (!email || !email.includes('@')) {
+      alert('Por favor ingresa un email válido');
+      return;
+    }
+    alert('¡Listo! Revisa tu correo para confirmar tu suscripción.');
+    closeFreeModalBtn();
+  }
+</script>
+
+</body>
+</html>
