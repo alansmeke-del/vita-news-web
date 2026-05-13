@@ -825,12 +825,52 @@
 <div class="modal-overlay" id="freeModal" onclick="closeFreeModal(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeFreeModalBtn()">✕</button>
-    <div class="modal-eyebrow">Plan Gratuito</div>
-    <h3>Empieza a leer hoy</h3>
-    <p>Recibe el newsletter cada mañana a las 7 AM. Sin tarjeta. Sin compromiso.</p>
-    <input type="email" class="modal-input" placeholder="tu@empresa.com" id="freeEmail">
-    <button class="btn-primary" onclick="submitFree()">Suscribirme gratis</button>
-    <div class="modal-note">Puedes cancelar en cualquier momento.</div>
+    <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1778666");</style>
+    <div id="mlb2-41257669" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-41257669">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h4>Empieza a leer hoy</h4>
+              <p>El newsletter de negocios de México cada mañana a las 7 AM. Sin tarjeta. Sin compromiso</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2297926/forms/187372665902728776/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="tu@empresa.com" autocomplete="email">
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="ml-submit" value="1">
+              <div class="ml-form-embedSubmit">
+                <button type="submit" class="primary">Suscribirme gratis</button>
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h4>¡Listo!</h4>
+              <p>Revisa tu correo para confirmar tu suscripción.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function ml_webform_success_41257669() {
+        var $ = ml_jQuery || jQuery;
+        $('.ml-subscribe-form-41257669 .row-success').show();
+        $('.ml-subscribe-form-41257669 .row-form').hide();
+      }
+    </script>
+    <script src="https://groot.mailerlite.com/js/w/webforms.min.js?vb397d78ebaa8a0f631d35384c46d781b" type="text/javascript"></script>
+    <script>fetch("https://assets.mailerlite.com/jsonp/2297926/forms/187372665902728776/takel")</script>
   </div>
 </div>
 
@@ -852,15 +892,6 @@
     if (e.target === document.getElementById('freeModal')) {
       document.getElementById('freeModal').classList.remove('active');
     }
-  }
-  function submitFree() {
-    const email = document.getElementById('freeEmail').value;
-    if (!email || !email.includes('@')) {
-      alert('Por favor ingresa un email válido');
-      return;
-    }
-    alert('¡Listo! Revisa tu correo para confirmar tu suscripción.');
-    closeFreeModalBtn();
   }
 </script>
 
