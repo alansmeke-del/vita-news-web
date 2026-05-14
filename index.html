@@ -640,6 +640,17 @@
   .modal-input:focus { border-color: var(--ink); }
   .modal-note { font-size: 10px; color: var(--ink-3); text-align: center; margin-top: 0.6rem; font-weight: 300; }
 
+  .modal-msg {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 0.8rem;
+    padding: 10px 12px;
+    display: none;
+    line-height: 1.5;
+  }
+  .modal-msg.success { display: block; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .modal-msg.error   { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
   @media (max-width: 640px) {
     .hero { grid-template-columns: 1fr; }
     .hero-right { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; }
@@ -835,8 +846,9 @@
     <h3>Empieza a leer hoy</h3>
     <p>Recibe el newsletter cada mañana a las 7 AM. Sin tarjeta. Sin compromiso.</p>
     <input type="email" class="modal-input" placeholder="tu@empresa.com" id="freeEmail">
-    <button class="btn-primary" onclick="submitFree()">Suscribirme gratis</button>
+    <button class="btn-primary" id="freeSubmitBtn" onclick="submitFree(this)">Suscribirme gratis</button>
     <div class="modal-note">Puedes cancelar en cualquier momento.</div>
+    <div id="freeMsg" class="modal-msg"></div>
   </div>
 </div>
 
@@ -859,14 +871,44 @@
       document.getElementById('freeModal').classList.remove('active');
     }
   }
-  function submitFree() {
-    const email = document.getElementById('freeEmail').value;
+  async function submitFree(btn) {
+    const email = document.getElementById('freeEmail').value.trim();
+    const msgEl = document.getElementById('freeMsg');
+    msgEl.className = 'modal-msg';
+
     if (!email || !email.includes('@')) {
-      alert('Por favor ingresa un email válido');
+      msgEl.className = 'modal-msg error';
+      msgEl.textContent = 'Por favor ingresa un email válido.';
       return;
     }
-    alert('¡Listo! Revisa tu correo para confirmar tu suscripción.');
-    closeFreeModalBtn();
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      const res = await fetch('https://gentle-laughter-production-7f2c.up.railway.app/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiYmMxOWIzNDQ5YjExYTVhZGZmNTcxY2EzYWUxMThiOWUyMDZjNzczYjk4OGQ4ZWIzMjc5MDJjNGRhZDc4ZTc3NDM1MjNlYjg1N2E3Njg5NmMiLCJpYXQiOjE3NzgxODA5MDkuMTcwNTM1LCJuYmYiOjE3NzgxODA5MDkuMTcwNTM5LCJleHAiOjQ5MzM4NTQ1MDkuMTYxMTczLCJzdWIiOiIyMzE3MDUwIiwic2NvcGVzIjpbXX0.ddkuTCzKcyiWh2lY7n4pZOTT2zKycDRTZvt0m96VKQejjKs2nw7_8YmnC8FVzccHNSK9IRxkX48K2n3gDZ2wLPXOZOJjwupdpuIJPJBdkEY9nR-3wcIe3gWlUxvByMQ0ZuHWNCZIVk5kr-ovcmIT1W74a24yOXCDQvLKqmSdVXfl6PPBYWZ2fosHuAvY1VovHXx1isz-7cvkUt6wkRYdqch9sQGG3s1NvMyXzsxoLwhR9_p41-rhDssvARB2B3ack1X2reY5d6KD8QqE8QUc-AELjtHZ5sqVQZNKmVvu7lA1PSJLTta31XXgnEgX4E6ZhQ686jQAZjzWUE48SkNDDiflQvUqN-w-5ZGe0PyFB3oGp5opc-eOhKCi3gGTgdi04hdAa56aXyarq_KFB38dTBAnQPMgGXf15rjLI57Hts4_D5sVFlwYduj7tujd-l8rsM17t3AGOwzlS9E69t8BavEHRoFwSppyHUsO_Tj3xZMG7myKcOQxWvlnXf2J7OgBPgx1NUtlhEyWK6JgDWD8NZYEZNK_t-IIJ92YXoVLAo_YFiAqbt-CA2ozZYExnEkDh4sToIAOkfj5hWD-7NVO2g5gKSuLPOuLD27x8rYELv2fV9ntUEtCyDHknXs0wl6nBzNb5WbDQJLe6DV8-pE38AOjjW4C6hSYhWySHNpqp7s'
+        },
+        body: JSON.stringify({ email: email, groups: ['187372665902728776'] })
+      });
+
+      if (res.ok) {
+        msgEl.className = 'modal-msg success';
+        msgEl.textContent = '¡Listo! Revisa tu correo para confirmar tu suscripción.';
+        document.getElementById('freeEmail').value = '';
+      } else {
+        throw new Error('API error ' + res.status);
+      }
+    } catch (err) {
+      msgEl.className = 'modal-msg error';
+      msgEl.textContent = 'Hubo un error. Intenta de nuevo.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Suscribirme gratis';
+    }
   }
 </script>
 
