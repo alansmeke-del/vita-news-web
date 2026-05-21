@@ -651,6 +651,26 @@
   .modal-msg.success { display: block; background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
   .modal-msg.error   { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
+  .privacy-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+    color: var(--ink-2);
+    margin: 0.75rem 0 0.25rem;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+  }
+  .privacy-label a { color: var(--ink); }
+  .privacy-error {
+    display: none;
+    font-size: 11px;
+    color: var(--red-accent);
+    margin-bottom: 0.4rem;
+  }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
   @media (max-width: 640px) {
     .hero { grid-template-columns: 1fr; }
     .hero-right { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; }
@@ -867,7 +887,9 @@
           <div class="plan-feat"><span class="plan-feat-check">✓</span> La lección del día completa</div>
           <div class="plan-feat"><span class="plan-feat-check">✓</span> Ediciones de autor — ideas de negocios globales explicadas para México</div>
         </div>
-        <a href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00" class="plan-btn-premium">Quiero entender mi dinero</a>
+        <label class="privacy-label"><input type="checkbox" id="premiumPrivacy"> Acepto el <a href="/aviso-de-privacidad">Aviso de Privacidad</a></label>
+        <div class="privacy-error" id="premiumPrivacyErr">Debes aceptar el Aviso de Privacidad para continuar.</div>
+        <a href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00" class="plan-btn-premium" onclick="return checkPremiumPrivacy()">Quiero entender mi dinero</a>
       </div>
     </div>
   </div>
@@ -892,7 +914,9 @@
     <h3>Empieza a leer hoy</h3>
     <p>Recibe el newsletter cada mañana a las 7 AM. Sin tarjeta. Sin compromiso.</p>
     <input type="email" class="modal-input" placeholder="tu@empresa.com" id="freeEmail">
-    <button class="btn-primary" id="freeSubmitBtn" onclick="submitFree(this)">Suscribirme gratis</button>
+    <label class="privacy-label"><input type="checkbox" id="freePrivacy" onchange="toggleFreeBtn()"> Acepto el <a href="/aviso-de-privacidad">Aviso de Privacidad</a></label>
+    <div class="privacy-error" id="freePrivacyErr">Debes aceptar el Aviso de Privacidad para continuar.</div>
+    <button class="btn-primary" id="freeSubmitBtn" onclick="submitFree(this)" disabled>Suscribirme gratis</button>
     <div class="modal-note">Puedes cancelar en cualquier momento.</div>
     <div id="freeMsg" class="modal-msg"></div>
   </div>
@@ -909,18 +933,44 @@
   function openFreeModal() {
     document.getElementById('freeModal').classList.add('active');
   }
+  function resetFreeModal() {
+    document.getElementById('freePrivacy').checked = false;
+    document.getElementById('freeSubmitBtn').disabled = true;
+    document.getElementById('freePrivacyErr').style.display = 'none';
+  }
   function closeFreeModalBtn() {
     document.getElementById('freeModal').classList.remove('active');
+    resetFreeModal();
   }
   function closeFreeModal(e) {
     if (e.target === document.getElementById('freeModal')) {
       document.getElementById('freeModal').classList.remove('active');
+      resetFreeModal();
     }
   }
+  function toggleFreeBtn() {
+    const checked = document.getElementById('freePrivacy').checked;
+    document.getElementById('freeSubmitBtn').disabled = !checked;
+    if (checked) document.getElementById('freePrivacyErr').style.display = 'none';
+  }
+
+  function checkPremiumPrivacy() {
+    const checked = document.getElementById('premiumPrivacy').checked;
+    const errEl = document.getElementById('premiumPrivacyErr');
+    if (!checked) { errEl.style.display = 'block'; return false; }
+    errEl.style.display = 'none';
+    return true;
+  }
+
   async function submitFree(btn) {
     const email = document.getElementById('freeEmail').value.trim();
     const msgEl = document.getElementById('freeMsg');
     msgEl.className = 'modal-msg';
+
+    if (!document.getElementById('freePrivacy').checked) {
+      document.getElementById('freePrivacyErr').style.display = 'block';
+      return;
+    }
 
     if (!email || !email.includes('@')) {
       msgEl.className = 'modal-msg error';
