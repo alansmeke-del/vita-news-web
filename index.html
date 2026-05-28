@@ -1208,7 +1208,7 @@
   var promoTimerInterval = null;
 
   function dismissPromo() {
-    localStorage.setItem('vita_promo_seen', 'true');
+    sessionStorage.setItem('vita_promo_seen', 'true');
     document.getElementById('promoOverlay').classList.remove('active');
     if (promoTimerInterval) { clearInterval(promoTimerInterval); promoTimerInterval = null; }
   }
@@ -1251,8 +1251,8 @@
     startPromoTimer();
   }
 
-  if (!localStorage.getItem('vita_promo_seen')) {
-    setTimeout(showPromo, 15000);
+  if (!sessionStorage.getItem('vita_promo_seen')) {
+    setTimeout(showPromo, 10000);
   }
 
   async function submitFree(btn) {
