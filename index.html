@@ -734,7 +734,7 @@
   .promo-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(26,24,20,0.85);
+    background: rgba(26,24,20,0.88);
     z-index: 400;
     display: flex;
     align-items: center;
@@ -755,115 +755,144 @@
     border-top: 4px solid var(--gold);
     max-width: 420px;
     width: 100%;
-    padding: 2rem;
     position: relative;
     transform: translateY(20px);
     transition: transform 0.3s;
+    overflow: hidden;
   }
 
   .promo-overlay.active .promo-modal { transform: translateY(0); }
 
+  .promo-urgency-bar {
+    background: var(--red-accent);
+    color: var(--paper);
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 7px 2rem;
+  }
+
+  .promo-body {
+    padding: 1.6rem 2rem 2rem;
+  }
+
   .promo-close {
     position: absolute;
-    top: 1rem;
+    top: 0.65rem;
     right: 1rem;
     background: none;
     border: none;
-    font-size: 1.1rem;
-    color: var(--ink-3);
+    font-size: 1rem;
+    color: rgba(247,243,236,0.6);
     cursor: pointer;
+    line-height: 1;
   }
 
-  .promo-eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 500;
-  }
+  .promo-close:hover { color: var(--paper); }
 
   .promo-headline {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+
+  .promo-price-context {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-bottom: 0.15rem;
+    font-weight: 300;
+    text-decoration: line-through;
   }
 
   .promo-subtext {
     font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.6;
-    margin-bottom: 1.2rem;
-    font-weight: 300;
+    color: var(--red-accent);
+    line-height: 1.5;
+    margin-bottom: 1.3rem;
+    font-weight: 500;
+    font-style: italic;
   }
 
   .promo-code-label {
     font-size: 10px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-3);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .promo-code-row {
     display: flex;
     align-items: stretch;
     gap: 0;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.6rem;
+    border: 2px solid var(--gold);
   }
 
   .promo-code {
     flex: 1;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.4rem;
+    font-size: 1.65rem;
     font-weight: 400;
     color: var(--gold-light);
     background: var(--ink);
-    padding: 0.6rem 1rem;
-    letter-spacing: 0.08em;
+    padding: 0.75rem 1rem;
+    letter-spacing: 0.1em;
     display: flex;
     align-items: center;
   }
 
   .promo-copy-btn {
-    background: var(--ink-2);
-    color: var(--paper);
+    background: var(--gold);
+    color: var(--ink);
     border: none;
-    padding: 0.6rem 1rem;
+    padding: 0.75rem 1rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     cursor: pointer;
     transition: background 0.2s;
     white-space: nowrap;
   }
 
-  .promo-copy-btn:hover { background: var(--ink-3); }
+  .promo-copy-btn:hover { background: var(--gold-light); }
+
+  .promo-social-proof {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+  }
 
   .promo-timer {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 1.2rem;
-    padding: 0.8rem;
-    border: 1px solid var(--rule);
-    background: var(--paper-2);
+    padding: 0.75rem 1rem;
+    background: var(--red-accent);
   }
 
   .promo-timer-label {
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 0.2rem;
+    color: rgba(247,243,236,0.75);
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   .promo-timer-count {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.8rem;
-    color: var(--red-accent);
+    font-size: 2rem;
+    color: var(--paper);
     font-weight: 400;
     line-height: 1;
   }
@@ -871,20 +900,20 @@
   .promo-cta {
     display: block;
     width: 100%;
-    padding: 13px;
+    padding: 15px;
     text-align: center;
     background: var(--gold);
     border: none;
     color: var(--ink);
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
     transition: background 0.2s;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.85rem;
   }
 
   .promo-cta:hover { background: var(--gold-light); }
@@ -892,7 +921,7 @@
   .promo-dismiss {
     display: block;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--ink-3);
     cursor: pointer;
     background: none;
@@ -900,11 +929,12 @@
     width: 100%;
     padding: 0.3rem;
     font-family: 'IBM Plex Sans', sans-serif;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 300;
+    font-style: italic;
   }
 
-  .promo-dismiss:hover { color: var(--ink); }
+  .promo-dismiss:hover { color: var(--ink-2); }
 </style>
 </head>
 <body>
@@ -1088,21 +1118,27 @@
 <!-- PROMO POPUP -->
 <div class="promo-overlay" id="promoOverlay">
   <div class="promo-modal">
-    <button class="promo-close" onclick="dismissPromo()">✕</button>
-    <div class="promo-eyebrow">Oferta por tiempo limitado</div>
-    <h3 class="promo-headline">Oferta exclusiva para ti</h3>
-    <p class="promo-subtext">Suscríbete a Premium hoy con 20% de descuento en tu primer mes</p>
-    <div class="promo-code-label">Tu código único</div>
-    <div class="promo-code-row">
-      <div class="promo-code" id="promoCode">VITA-…</div>
-      <button class="promo-copy-btn" onclick="copyPromoCode()">Copiar</button>
+    <div class="promo-urgency-bar">
+      ⚡ Solo para nuevos lectores
+      <button class="promo-close" onclick="dismissPromo()">✕</button>
     </div>
-    <div class="promo-timer">
-      <div class="promo-timer-label">Esta oferta expira en</div>
-      <div class="promo-timer-count" id="promoTimer">5:00</div>
+    <div class="promo-body">
+      <h3 class="promo-headline">Tu primer mes por $120 MXN</h3>
+      <div class="promo-price-context">Precio regular: $150 MXN/mes</div>
+      <p class="promo-subtext">Este código es único y expira en 5 minutos — no se puede recuperar</p>
+      <div class="promo-code-label">Tu código exclusivo</div>
+      <div class="promo-code-row">
+        <div class="promo-code" id="promoCode">VITA-…</div>
+        <button class="promo-copy-btn" onclick="copyPromoCode()">Copiar</button>
+      </div>
+      <div class="promo-social-proof">Únete a los lectores que ya entienden su dinero</div>
+      <div class="promo-timer">
+        <div class="promo-timer-label">Oferta expira en</div>
+        <div class="promo-timer-count" id="promoTimer">5:00</div>
+      </div>
+      <a class="promo-cta" id="promoCta" href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00">Quiero mi descuento ahora →</a>
+      <button class="promo-dismiss" onclick="dismissPromo()">Prefiero pagar precio completo</button>
     </div>
-    <a class="promo-cta" id="promoCta" href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00">Aplicar descuento →</a>
-    <button class="promo-dismiss" onclick="dismissPromo()">No me interesa</button>
   </div>
 </div>
 
