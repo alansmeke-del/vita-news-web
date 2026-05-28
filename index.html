@@ -1101,7 +1101,7 @@
       <div class="promo-timer-label">Esta oferta expira en</div>
       <div class="promo-timer-count" id="promoTimer">5:00</div>
     </div>
-    <a class="promo-cta" href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00">Aplicar descuento →</a>
+    <a class="promo-cta" id="promoCta" href="https://buy.stripe.com/cNi14nfszgheexEdoYafS00">Aplicar descuento →</a>
     <button class="promo-dismiss" onclick="dismissPromo()">No me interesa</button>
   </div>
 </div>
@@ -1209,6 +1209,8 @@
     } catch (e) {
       document.getElementById('promoCode').textContent = 'VITA-2026';
     }
+    const code = document.getElementById('promoCode').textContent;
+    document.getElementById('promoCta').href = 'https://buy.stripe.com/cNi14nfszgheexEdoYafS00?prefilled_promo_code=' + encodeURIComponent(code);
     document.getElementById('promoOverlay').classList.add('active');
     startPromoTimer();
   }
