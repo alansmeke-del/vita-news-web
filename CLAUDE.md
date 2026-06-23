@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static HTML landing page for **Vita News** (vitanews.com.mx), a Spanish-language business newsletter. The entire site is a single file: `index.html` (~1020 lines) with embedded CSS and JavaScript. There is no build system, package manager, or framework.
+Static HTML landing page for **We Know** (wek.com.mx), a Spanish-language business newsletter. The entire site is a single file: `index.html` (~1020 lines) with embedded CSS and JavaScript. There is no build system, package manager, or framework.
 
-**Deployment**: Git push to `main` → GitHub Pages auto-publishes to vitanews.com.mx (CNAME file).
+**Deployment**: Git push to `main` → GitHub Pages auto-publishes to wek.com.mx (CNAME file).
 
 ## Development
 
@@ -38,7 +38,7 @@ Everything lives in `index.html`, organized in this order:
 | Email subscriptions (free tier) | POST to Railway proxy → MailerLite group |
 | Premium plan checkout | `checkPremiumPrivacy()` → `window.location.href` to Stripe URL |
 | Referral tracking | `?ref=` URL param → hidden input → subscribe payload field `referral_code` |
-| Domain | `CNAME` file → vitanews.com.mx via GitHub Pages |
+| Domain | `CNAME` file → wek.com.mx via GitHub Pages |
 
 ## Conventions
 
