@@ -29,7 +29,7 @@ Everything lives in `index.html`, organized in this order:
    - Free-tier modal open/close logic (closes on overlay click or ✕ button; resets privacy checkbox state on close)
    - Privacy checkbox gate: the free modal submit button starts `disabled` and is only enabled after the checkbox fires `toggleFreeBtn()`; the premium button calls `checkPremiumPrivacy()` before redirecting to Stripe
    - Email subscription POST to Railway proxy (`gentle-laughter-production-7f2c.up.railway.app/subscribe`), which forwards to the MailerLite API (group ID `187372665902728776`)
-5. **Stripe** checkout links are plain `<a href>` / `window.location.href` pointing to a Stripe-hosted payment page (`buy.stripe.com/cNi14nfszgheexEdoYafS00`).
+5. **Stripe** checkout links are plain `<a href>` / `window.location.href` pointing to a Stripe-hosted payment page (`buy.stripe.com/14AcN50xF8OM2OW4SsafS01`).
 
 ## Key Integrations
 
