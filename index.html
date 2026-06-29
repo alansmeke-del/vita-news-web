@@ -1128,7 +1128,7 @@
       <p class="promo-subtext">Este código es único y expira en 5 minutos — no se puede recuperar</p>
       <div class="promo-code-label">Tu código exclusivo</div>
       <div class="promo-code-row">
-        <div class="promo-code" id="promoCode">VITA-…</div>
+        <div class="promo-code" id="promoCode">ALAS7-…</div>
         <button class="promo-copy-btn" onclick="copyPromoCode()">Copiar</button>
       </div>
       <div class="promo-social-proof">Únete a los lectores que ya entienden su dinero</div>
@@ -1241,9 +1241,9 @@
         headers: { 'X-Vita-Secret': 'vitanews2026' }
       });
       const data = await res.json();
-      document.getElementById('promoCode').textContent = data.code || 'VITA-2026';
+      document.getElementById('promoCode').textContent = data.code || 'ALAS7-2026';
     } catch (e) {
-      document.getElementById('promoCode').textContent = 'VITA-2026';
+      document.getElementById('promoCode').textContent = 'ALAS7-2026';
     }
     const code = document.getElementById('promoCode').textContent;
     document.getElementById('promoCta').href = 'https://buy.stripe.com/14AcN50xF8OM2OW4SsafS01?prefilled_promo_code=' + encodeURIComponent(code);
